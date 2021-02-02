@@ -1,0 +1,12 @@
+---
+- hosts: "{{ target_host }}"
+  tasks:
+    - name: Create destination folder
+      file:
+        path: /etc/docker/registry
+        state: directory
+    - name: Add compose file for registry
+      template:
+        src: ../../roles/registry/templates/docker-compose_registry.yml.j2
+        dest: /etc/docker/registry/docker-compose.yml
+        mode: '644'

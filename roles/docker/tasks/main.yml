@@ -1,0 +1,76 @@
+---
+- name: Remove old Docker packages
+  yum:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+    state: absent
+
+- name: Install Docker support packages
+  yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+      - epel-release
+    state: present
+
+- name: Add Docker repository
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: Install Docker
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Create /etc/docker folder
+  file:
+    name: /etc/docker
+    state: directory
+
+- name: Create daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+
+- name: Replace service configuration
+  lineinfile:
+    path: /usr/lib/systemd/system/docker.service
+    regexp: '^ExecStart='
+    line: ExecStart=/usr/bin/dockerd
+
+- name: Enable and start Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+    daemon_reload: yes
+
+- name: Download docker-compose
+  get_url:
+    url: 'https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64'
+    dest: '/usr/local/bin/docker-compose'
+
+- name: Make docker-compose executable
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: '0744'
+
+- name: Add docker group
+  group:
+    name: docker
+
+- name: Add user to the group
+  user:
+    name: '{{ builder_host_user }}'
+    groups: docker
+    append: yes

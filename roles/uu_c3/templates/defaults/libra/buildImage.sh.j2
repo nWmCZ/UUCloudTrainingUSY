@@ -1,0 +1,310 @@
+#!/bin/bash
+
+# Note: from C3 script is launched remotely:
+# ssh -l root docker_registry 'bash -s' -- < buildImage.sh [PARAMETERS]
+#[CONFIGURATION]
+DOCKER_REPO="{{ registry_hostname }}:{{ registry_port }}"
+API="api.plus4u.net"
+#skip certificate validation
+SEC="--insecure"
+
+#[CODE]
+function usage() {
+  echo "Usage:
+  ./$(basename "$0") [PARAMETERS]
+Where:
+  -a action (create/delete)
+  -p path of destination
+  -i show this help text
+  -u uuApp pack URI
+  -t auth token value (without type)
+  -T auth type (Basic/Bearer/...)
+  -s stack type (+version)
+  -r RAM size (optional)
+  -c CPU priority (optional)
+  -n image name
+  -o Docker user override
+  -d Docker Registry destination
+  -f force (optional)
+  -h Docker Host
+  -b Build directory path
+Example:
+  ./$(basename "$0") -a create -T Bearer -t hast -u ues:[84723967990075193]:[34339947344988855]:DTC.GB/CMD-PACK
+                  -r 500 -c 1 -s base_image -n dtc_gb_cmd_pack-cmd_jruby_v1_0:0.0.80 -p dtc-guestbook"
+  exit 1;
+}
+
+# get war from uu
+get_war() {
+
+  local response_code=`curl \
+    $SEC  \
+    -X GET \
+    -H "Accept: application/octet-stream" \
+    -H "Authorization: $1 $2" \
+    -o "$5/$3"".war" \
+    -w "%{http_code}" \
+    https://$API/ues/wcp/ues/core/attachment/UESAttachment/getAttachmentData?uesuri=$4`
+
+  RCODE=$?
+  if [ "$RCODE" != "0" ]; then
+    exit 51
+  elif [ "$response_code" != "200" ]; then
+    exit 51
+  else
+    return $RCODE;
+  fi
+}
+
+# put image from local to registry
+pull_image() {
+  local IMAGENAME=`echo $1 |awk -F ":" '{print $1}'`
+  local IMAGEVERS=`echo $1 |awk -F ":" '{print $2}'`
+  local IMAGEID=`docker images $IMAGENAME |awk -v pattern="$IMAGEVERS" '$2==pattern {print $3}'`
+  docker tag $IMAGEID $2/$1
+  docker push $2/$1
+  RCODE=$?
+  echo $RCODE
+  if [ "$RCODE" != "0" ]; then
+    exit 53
+  else
+    docker rmi $1 $2/$1
+    return $RCODE;
+  fi
+}
+# create Dockerfile
+create_dockerfile() {
+  dockerfile="$BUILDDIR/template.dck"
+
+  echo "FROM %STACK%" >> $dockerfile
+  echo "ADD %CONTEXT%.war /tmp/%CONTEXT%.war" >> $dockerfile
+  if [ -n "$CONTAINER_USER_OVERRIDE" ]; then
+    echo "ENV UU_HOME /home/uucloud/.uu" >> $dockerfile
+  fi
+  echo "ADD log4r.xml /root/.uu/config/log4r.xml" >> $dockerfile
+  echo "ADD uu-client.properties /root/.uu/config/uu-client.properties" >> $dockerfile
+  echo "RUN \\" >> $dockerfile
+  if [ -n "$CONTAINER_USER_OVERRIDE" ]; then
+    echo "  groupadd --gid $GID uucloud &&\\" >> $dockerfile
+    echo "  useradd --uid $UID --gid $GID uucloud &&\\" >> $dockerfile
+    echo "  mkdir -p /mnt && chown -R uucloud:uucloud /mnt && mkdir /home/uucloud/.uu && chown -R uucloud:uucloud /home/uucloud/.uu &&\\" >> $dockerfile
+  fi
+  echo "  chmod -R 750 /root &&\\" >> $dockerfile
+  echo "  rm -r /usr/appserver/tomcat/webapps/* &&\\" >> $dockerfile
+  echo "  mkdir -p /usr/appserver/tomcat/webapps/%CONTEXT% &&\\" >> $dockerfile
+  echo "  cd /usr/appserver/tomcat/webapps/%CONTEXT% &&\\" >> $dockerfile
+  echo "  jar -xf /tmp/%CONTEXT%.war &&\\" >> $dockerfile
+  echo "  rm /tmp/%CONTEXT%.war &&\\" >> $dockerfile
+  echo "  chmod -R 750 /usr/appserver/tomcat" >> $dockerfile
+  if [ -n "$CONTAINER_USER_OVERRIDE" ]; then
+    # Workaround for runtime stacks with own user
+    echo "RUN \\" >> $dockerfile
+    echo "  ORIGINAL_USER=$(basename "$(dirname "$ORIGINAL_UU_HOME")") &&\\" >> $dockerfile
+    echo "  usermod -aG uucloud $ORIGINAL_USER" >> $dockerfile
+  fi
+  sed -e "s;%STACK%;$1;g" -e "s;%CONTEXT%;$2;g" template.dck > Dockerfile
+  if [ `unzip -l $BUILDDIR/$2.war | grep -c "WEB-INF/gems/gems/uu_applog-"` -eq 0 ]; then
+    sed 's!.*default-applog.*!!g' -i $BUILDDIR/log4r.xml
+  fi
+  RCODE=$?
+  echo $RCODE
+  if [ "$RCODE" != "0" ]; then
+    exit 54
+  else
+    return $RCODE;
+  fi
+}
+
+# create image localy
+build_image() {
+  docker build --force-rm --pull -t $1 .
+  RCODE=$?
+  if [ "$RCODE" != "0" ]; then
+    exit 54
+  else
+    # clean temporary files
+    rm -rf $BUILDDIR
+    return $RCODE;
+  fi
+}
+
+url_encode() {
+  url=$(echo "$1" |
+    sed -e 's/%/%25/g' -e 's/ /%20/g' -e 's/!/%21/g'        \
+        -e 's/"/%22/g' -e 's/#/%23/g' -e 's/\$/%24/g'       \
+        -e 's/\&/%26/g' -e 's/'\''/%27/g' -e 's/(/%28/g'    \
+        -e 's/)/%29/g' -e 's/\*/%2a/g' -e 's/+/%2b/g'       \
+        -e 's/,/%2c/g' -e 's/-/%2d/g' -e 's/\./%2e/g'       \
+        -e 's/\//%2f/g' -e 's/:/%3a/g' -e 's/;/%3b/g'       \
+        -e 's//%3e/g' -e 's/?/%3f/g' -e 's/@/%40/g'         \
+        -e 's/\[/%5b/g' -e 's/\\/%5c/g' -e 's/\]/%5d/g'     \
+        -e 's/\^/%5e/g' -e 's/_/%5f/g' -e 's/`/%60/g'       \
+        -e 's/{/%7b/g' -e 's/|/%7c/g' -e 's/}/%7d/g'        \
+        -e 's/~/%7e/g')
+  echo $url
+}
+
+# Not implemented
+delete_image() {
+  rm -rf $BUILDDIR
+  NAME=$1
+  DEST=$2
+  docker rmi $NAME
+  RCODE=$?
+  if [ "$RCODE" != "0" ]; then
+    return 0
+  else
+    return $RCODE;
+  fi
+}
+
+if [[ $# -eq 0 ]]; then
+  usage
+fi
+
+create_log4r_xml() {
+  logfile="$BUILDDIR/log4r.xml"
+
+  echo "<log4r_config>" >> $logfile
+  echo "<pre_config>" >> $logfile
+  echo "    <global level=\"DEBUG\" />" >> $logfile
+  echo "    <parameter name=\"messageFormat\" value=\"TRACE_LOG %l {\\&quot;eventTime\\&quot;:\\&quot;%d{ISO8601}\\&quot;, \\&quot;logger\\&quot;:\\&quot;%C\\&quot;,\\&quot;message\\&quot;:\\&quot;%m\\&quot;,\\&quot;traceId\\&quot;:\\&quot;%X{:traceId}\\&quot;,\\&quot;processId\\&quot;:\\&quot;%s\\&quot;,\\&quot;threadId\\&quot;:\\&quot;%X{:threadId}\\&quot;,\\&quot;threadName\\&quot;:\\&quot;%X{:threadName}\\&quot;,\\&quot;resourceUri\\&quot;:\\&quot;%X{:resourceUri}\\&quot;,\\&quot;identityId\\&quot;:\\&quot;%X{:identityId} %x{:identityId}\\&quot;,\\&quot;clientId\\&quot;:\\&quot;%X{:clientId}\\&quot;,\\&quot;sessionId\\&quot;:\\&quot;%X{:sessionId}\\&quot;,\\&quot;errorId\\&quot;:\\&quot;%x{:errorId}\\&quot;,\\&quot;errorTrace\\&quot;:\\&quot;%t\\&quot;}\" />" >> $logfile
+  echo "    <parameter name=\"dateFormat\" value=\"%Y-%m-%dT%H:%M:%S\" />" >> $logfile
+  echo "  </pre_config>" >> $logfile
+  echo "  <outputter name=\"default-file\" type=\"StdoutOutputter\" level=\"DEBUG\">" >> $logfile
+  echo "    <formatter type=\"PatternFormatter\" pattern=\"\#{messageFormat}\">" >> $logfile
+  echo "      <date_format>\#{dateFormat}</date_format>" >> $logfile
+  echo "    </formatter>" >> $logfile
+  echo "  </outputter>" >> $logfile
+  echo "  <outputter name=\"default-applog\" type=\"UU::AppLog::Outputter\" level=\"DEBUG\" />" >> $logfile
+  echo "</log4r_config>" >> $logfile
+}
+
+DHOST=""
+while getopts ":a:b:u:t:T:s:r:c:n:d:o:p:h:fU:G:" opt; do
+  case $opt in
+    a)
+      ACTION=$OPTARG
+      echo "-a was triggered, Parameter: $OPTARG" >&2
+    ;;
+    u)
+      URI=$OPTARG
+      echo "-u was triggered, Parameter: $OPTARG" >&2
+    ;;
+    t)
+      TOKEN=$OPTARG
+      echo "-t was triggered, Parameter: $OPTARG" >&2
+    ;;
+    T)
+      TOKENTYPE=$OPTARG
+      echo "-T was triggered, Parameter: $OPTARG" >&2
+    ;;
+    s)
+      STACK=$OPTARG
+      echo "-s was triggered, Parameter: $OPTARG" >&2
+    ;;
+    r)
+      RAM=$OPTARG
+      echo "-r was triggered, Parameter: $OPTARG" >&2
+    ;;
+    c)
+      CPU=$OPTARG
+      echo "-c was triggered, Parameter: $OPTARG" >&2
+    ;;
+    n)
+      NAME=$OPTARG
+      echo "-n was triggered, Parameter: $OPTARG" >&2
+    ;;
+    d)
+      DEST=$OPTARG
+      echo "-d was triggered, Parameter: $OPTARG" >&2
+    ;;
+    o)
+      CONTAINER_USER_OVERRIDE=$OPTARG
+      echo "-o was triggered, Parameter: $OPTARG" >&2
+    ;;
+    p)
+      DPATH=$OPTARG
+      echo "-p was triggered, Parameter: $OPTARG" >&2
+    ;;
+    f)
+      FORCE=true
+    ;;
+    h)
+      DHOST=$OPTARG
+    ;;
+    b)
+      BUILDDIR=$OPTARG
+      cd $BUILDDIR
+    ;;
+    U)
+      UID=$OPTARG
+      echo "-U was triggered, Parameter: $OPTARG" >&2
+    ;;
+    G)
+      GID=$OPTARG
+      echo "-G was triggered, Parameter: $OPTARG" >&2
+    ;;
+    i)
+      usage
+    ;;
+    *)
+      usage
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      usage
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+case ${ACTION} in
+  create)
+    if [ -z "$URI" ]; then
+      echo "Missing -u <uri> option"
+      exit 10
+    fi
+    if [ -z "$TOKEN" ]; then
+      echo "Missing -t <token> option"
+      exit 11
+    fi
+    if [ -z "$TOKENTYPE" ]; then
+      echo "Missing -T <token_type> option"
+      exit 11
+    fi
+    if [ -z "$NAME" ]; then
+      echo "Missing -n <name> option"
+      exit 12
+    fi
+    if [ -z "$STACK" ]; then
+      echo "Missing -s <stack> option"
+      exit 13
+    fi
+    if [ -z "$DEST" ]; then
+      echo "Missing -d <destination> option, using default"
+      DEST=$DOCKER_REPO
+    fi
+    URIENC=$(url_encode "$URI")
+    get_war $TOKENTYPE "$TOKEN" $DPATH $URIENC $BUILDDIR
+    create_log4r_xml
+    create_dockerfile $DEST/$STACK $DPATH "Dockerfile"
+    build_image $NAME
+    pull_image $NAME $DEST
+    retval=$?
+    exit $retval
+  ;;
+  delete)
+    if [ -z "$NAME" ]; then
+      echo "Missing -n <name> option"
+      exit 12
+    fi
+    delete_image $NAME $DEST
+    retval=$?
+  ;;
+esac
+retval=$?
+exit $retval

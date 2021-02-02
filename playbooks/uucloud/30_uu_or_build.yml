@@ -1,0 +1,10 @@
+---
+- name: Download and install OR
+  hosts: syshost
+  become: true
+  vars:
+    uu_or_appbox_version: 2.11.1
+    uu_login_file_path: '/opt/installation/login'
+    uu_or_base_folder: '/opt/installation/uu_or'
+  roles:
+    - uu_or

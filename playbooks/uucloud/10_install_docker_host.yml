@@ -1,0 +1,11 @@
+---
+- name: Install docker host
+  hosts: all
+  become: true
+  roles:
+   - docker
+  tasks:
+  - name: Install python3 for sshuttle
+    yum:
+      name: python3
+      state: present

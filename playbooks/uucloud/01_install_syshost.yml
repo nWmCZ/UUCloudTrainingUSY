@@ -1,0 +1,100 @@
+---
+- name: Install syshost basic requirements
+  hosts: syshost
+  become: true
+  tasks:
+#    - name: Install EPEL repository and other packages
+#      yum:
+#        name:
+#          - epel-release
+#          - ruby
+#          - ruby-devel
+#          - gcc
+#          - mc
+#        state: present
+#
+#    - name: Install Python pip
+#      yum:
+#        name: python-pip
+#        state: present
+#
+#    - name: Install Python pip plugin zabbix-api
+#      pip:
+#        name: zabbix-api
+#        state: present
+#
+#    - name: Install uu_c3 gems
+#      gem:
+#        name: uu_c3
+#        source: https://gems.plus4u.net
+#
+#    - name: Install uu_os gems
+#      gem:
+#        name: uu_os
+#        source: https://gems.plus4u.net
+#
+#    - name: Install uu_operation_registry gems
+#      gem:
+#        name: uu_operation_registry
+#        source: https://gems.plus4u.net
+#
+#    - name: Install uu_os_cmd gems
+#      gem:
+#        name: uu_os_cmd
+#        source: https://gems.plus4u.net
+#
+#    - name: Create shared folder
+#      file:
+#        name: /opt/installation/shared-files/
+#        state: directory
+
+#    - name: Copy ssh private key
+#      copy:
+#        src: ~/.ssh/id_rsa_demo
+#        dest: /root/.ssh/id_rsa
+#        owner: root
+#        group: root
+#        mode: '0400'
+#
+#    - name: Copy ssh public key
+#      copy:
+#        src: ~/.ssh/id_rsa_demo.pub
+#        dest: /root/.ssh/id_rsa.pub
+#        owner: root
+#        group: root
+
+#    - name: Copy Java JDK
+#      copy:
+#        src: ~/work/temp/uucloud/jdk-8u144-linux-i586.rpm
+#        dest: /opt/installation/shared-files/jdk-8u144-linux-i586.rpm
+#
+#    - name: Copy Java JDK x64
+#      copy:
+#        src: ~/work/temp/uucloud/jdk-8u144-linux-x64.rpm
+#        dest: /opt/installation/shared-files/jdk-8u144-linux-x64.rpm
+#
+#    - name: Copy Java unlimited
+#      copy:
+#        src: ~/work/temp/uucloud/jce_policy-8.zip
+#        dest: /opt/installation/shared-files/jce_policy-8.zip
+#
+#    - name: Unarchive Java unlimited
+#      unarchive:
+#        src: /opt/installation/shared-files/jce_policy-8.zip
+#        dest: /opt/installation/shared-files/
+#        remote_src: yes
+#
+#    - name: Copy uu-client.properties
+#      copy:
+#        src: ~/work/temp/uucloud/uu-client.properties
+#        dest: /opt/installation/shared-files/uu-client.properties
+
+    - name: Create uuEEs folder
+      file:
+        name: /mnt/share/uu_script_users/weyYqBQ9
+        state: directory
+
+    - name: Copy deployment uuEE
+      copy:
+        src: ~/.uu/22-7709-1
+        dest: /mnt/share/uu_script_users/weyYqBQ9/22-7709-1

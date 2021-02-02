@@ -1,0 +1,45 @@
+---
+- name: Create directory uu_c3_{{ environment_name | lower }}
+  file:
+    path: /etc/docker/uu_c3_{{ environment_name | lower }}
+    state: directory
+    mode: '644'
+
+- name: Create directory /var/log/c3_logs
+  file:
+    path: /var/log/c3_logs
+    state: directory
+    mode: '644'
+
+- name: Add configuration files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '644'
+  with_items:
+    - { src: uu-client.properties.j2, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/uu-client.properties' }
+    - { src: defaults/libra/executor_controller.cfg, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/executor_controller.cfg' }
+    - { src: defaults/libra/uuApps-controller.cfg, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/uuApps-controller.cfg' }
+    - { src: defaults/libra/uuGatewayController.cfg, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/uuGatewayController.cfg' }
+    - { src: defaults/libra/buildImage.sh.j2, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/buildImage.sh' }
+    - { src: defaults/libra/log4r.xml, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/log4r.xml' }
+    - { src: defaults/libra/ssh_config, dest: '/etc/docker/uu_c3_{{ environment_name | lower }}/ssh_config' }
+
+- name: Create start script
+  template:
+    src: ../../../roles/uu_c3/templates/uu_c3.sh
+    dest: /etc/docker/run_uu_c3_{{ environment_name | lower }}_{{ inventory_hostname_short }}.sh
+    mode: 0755
+
+- name: Copy id_rsa from syshost to c3 run folder
+  copy:
+    src: /root/.ssh/id_rsa
+    dest: /etc/docker/uu_c3_{{ environment_name | lower }}/id_rsa
+    remote_src: true
+  mode: '0400'
+
+- name: Copy id_rsa.pub from syshost to c3 run folder
+  copy:
+    src: /root/.ssh/id_rsa.pub
+    dest: /etc/docker/uu_c3_{{ environment_name | lower }}/id_rsa.pub
+    remote_src: true

@@ -1,0 +1,594 @@
+2021-01-27 21:11:19,245 p=74973 u=nwm n=ansible | ERROR! The vault password file /Users/nwm/IdeaProjects/UUCloudTrainingUSY/.vault was not found
+2021-01-27 21:11:41,452 p=74998 u=nwm n=ansible | PLAY [Install docker host] ****************************************************************************************************************************************************************************************************************************************************
+2021-01-27 21:11:41,503 p=74998 u=nwm n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************************************************************************************************
+2021-01-27 21:11:41,813 p=74998 u=nwm n=ansible | fatal: [registry]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname registry: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,823 p=74998 u=nwm n=ansible | fatal: [swarmmanager]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname swarmmanager: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,840 p=74998 u=nwm n=ansible | fatal: [graylog]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname graylog: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,851 p=74998 u=nwm n=ansible | fatal: [gw]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname gw: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,973 p=74998 u=nwm n=ansible | fatal: [dockerhost1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname dockerhost1: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,975 p=74998 u=nwm n=ansible | fatal: [dockerhost2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname dockerhost2: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:41,988 p=74998 u=nwm n=ansible | fatal: [dockerhost3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname dockerhost3: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:42,024 p=74998 u=nwm n=ansible | fatal: [dockerhost4]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname dockerhost4: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:42,127 p=74998 u=nwm n=ansible | fatal: [dockerhost5]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname dockerhost5: nodename nor servname provided, or not known", "unreachable": true}
+2021-01-27 21:11:47,661 p=74998 u=nwm n=ansible |  [ERROR]: User interrupted execution
+
+2021-01-27 22:38:17,676 p=76750 u=nwm n=ansible | ERROR! this task 'task' has extra params, which is only allowed in the following modules: shell, win_shell, include_vars, add_host, raw, include_role, meta, set_fact, include, import_tasks, script, import_role, include_tasks, group_by, command, win_command
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/01_install_syshost.yml': line 5, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  tasks:
+    - name: Generate ssh keys
+      ^ here
+
+2021-01-27 22:43:44,559 p=76834 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************
+2021-01-27 22:43:44,576 p=76834 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:43:52,173 p=76834 u=nwm n=ansible | ok: [syshost]
+2021-01-27 22:43:52,192 p=76834 u=nwm n=ansible | TASK [Install EPEL repository and other packages] ************************************************************************************************************************************************************************************************************************
+2021-01-27 22:44:28,692 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:44:28,711 p=76834 u=nwm n=ansible | TASK [Install Python pip] ************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:44:34,851 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:44:34,868 p=76834 u=nwm n=ansible | TASK [Install Python pip plugin zabbix-api] ******************************************************************************************************************************************************************************************************************************
+2021-01-27 22:44:37,910 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:44:37,926 p=76834 u=nwm n=ansible | TASK [Install uu_c3 gems] ************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:45:01,324 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:45:01,339 p=76834 u=nwm n=ansible | TASK [Install uu_os gems] ************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:45:09,731 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:45:09,748 p=76834 u=nwm n=ansible | TASK [Install uu_operation_registry gems] ********************************************************************************************************************************************************************************************************************************
+2021-01-27 22:45:17,877 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:45:17,895 p=76834 u=nwm n=ansible | TASK [Install uu_os_cmd gems] ********************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:45:18,882 p=76834 u=nwm n=ansible | ok: [syshost]
+2021-01-27 22:45:18,899 p=76834 u=nwm n=ansible | TASK [Create shared folder] **********************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:45:20,005 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:45:20,027 p=76834 u=nwm n=ansible | TASK [Copy Java JDK] *****************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:46:06,666 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:46:06,688 p=76834 u=nwm n=ansible | TASK [Copy Java JDK x64] *************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:46:45,866 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:46:45,883 p=76834 u=nwm n=ansible | TASK [Copy Java unlimited] ***********************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:46:47,687 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:46:47,705 p=76834 u=nwm n=ansible | TASK [Copy uu-client.properties] *****************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:46:49,926 p=76834 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:46:49,928 p=76834 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:46:49,929 p=76834 u=nwm n=ansible | syshost                    : ok=13   changed=11   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 22:50:11,935 p=77162 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'registry_hostname' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/2_install_registry.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ registry_hostname }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-27 22:50:36,399 p=77178 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'registry_hostname' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/2_install_registry.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ registry_hostname }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-27 22:51:45,720 p=77204 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:51:45,737 p=77204 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:51:48,589 p=77204 u=nwm n=ansible | ok: [syshost]
+2021-01-27 22:51:48,608 p=77204 u=nwm n=ansible | TASK [Add compose file for registry] *************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:51:48,897 p=77204 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "msg": "Could not find or access '../../roles/docker_compose/templates/docker-compose_registry.yml.j2'\nSearched in:\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/templates/../../roles/docker_compose/templates/docker-compose_registry.yml.j2\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/../../roles/docker_compose/templates/docker-compose_registry.yml.j2\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/templates/../../roles/docker_compose/templates/docker-compose_registry.yml.j2\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/../../roles/docker_compose/templates/docker-compose_registry.yml.j2 on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+2021-01-27 22:51:48,899 p=77204 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:51:48,899 p=77204 u=nwm n=ansible | syshost                    : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-27 22:59:37,127 p=77318 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:37,143 p=77318 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:39,973 p=77318 u=nwm n=ansible | ok: [syshost]
+2021-01-27 22:59:39,992 p=77318 u=nwm n=ansible | TASK [Add compose file for registry] *************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:42,122 p=77318 u=nwm n=ansible | changed: [syshost]
+2021-01-27 22:59:42,124 p=77318 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:42,124 p=77318 u=nwm n=ansible | syshost                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 22:59:57,523 p=77366 u=nwm n=ansible | PLAY [Install docker host] ***********************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:57,532 p=77366 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 22:59:59,314 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:07,639 p=77366 u=nwm n=ansible | fatal: [swarmmanager]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.101 port 22: Operation timed out", "unreachable": true}
+2021-01-27 23:00:07,649 p=77366 u=nwm n=ansible | fatal: [dockerhost1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.102 port 22: Operation timed out", "unreachable": true}
+2021-01-27 23:00:07,657 p=77366 u=nwm n=ansible | fatal: [dockerhost2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.103 port 22: Operation timed out", "unreachable": true}
+2021-01-27 23:00:07,665 p=77366 u=nwm n=ansible | fatal: [dockerhost3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.104 port 22: Operation timed out", "unreachable": true}
+2021-01-27 23:00:09,399 p=77366 u=nwm n=ansible | fatal: [dockerhost4]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.105 port 22: Operation timed out", "unreachable": true}
+2021-01-27 23:00:09,418 p=77366 u=nwm n=ansible | TASK [docker : Remove old Docker packages] *******************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:11,322 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:11,340 p=77366 u=nwm n=ansible | TASK [docker : Install Docker support packages] **************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:12,435 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:12,454 p=77366 u=nwm n=ansible | TASK [docker : Add Docker repository] ************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:13,928 p=77366 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:00:13,946 p=77366 u=nwm n=ansible | TASK [docker : Install Docker] *******************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:15,054 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:15,071 p=77366 u=nwm n=ansible | TASK [docker : Create /etc/docker folder] ********************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:16,142 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:16,161 p=77366 u=nwm n=ansible | TASK [docker : Create daemon.json] ***************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:18,331 p=77366 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:00:18,347 p=77366 u=nwm n=ansible | TASK [docker : Replace service configuration] ****************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:19,393 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:19,410 p=77366 u=nwm n=ansible | TASK [docker : Enable and start Docker] **********************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:20,858 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:20,877 p=77366 u=nwm n=ansible | TASK [docker : Download docker-compose] **********************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:22,671 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:22,688 p=77366 u=nwm n=ansible | TASK [docker : Make docker-compose executable] ***************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:23,558 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:23,574 p=77366 u=nwm n=ansible | TASK [Install python3 for sshuttle] **************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:24,681 p=77366 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:00:24,683 p=77366 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | dockerhost1                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | dockerhost2                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | dockerhost3                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | dockerhost4                : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | swarmmanager               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:00:24,684 p=77366 u=nwm n=ansible | syshost                    : ok=12   changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:03:33,032 p=77896 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'registry_hostname' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/2_install_registry.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ registry_hostname }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-27 23:04:33,554 p=77920 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'registry_hostname' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/2_install_registry.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: '{{ registry_hostname }}'
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-27 23:04:58,369 p=77941 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'target_hosts' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/2_install_registry.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: '{{ target_hosts }}'
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-27 23:05:27,824 p=77962 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:05:27,830 p=77962 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:05:30,537 p=77962 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:05:30,554 p=77962 u=nwm n=ansible | TASK [Add compose file for registry] *************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:05:32,490 p=77962 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:05:32,493 p=77962 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:05:32,493 p=77962 u=nwm n=ansible | syshost                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:09:42,697 p=78023 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:09:42,705 p=78023 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:09:46,079 p=78023 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:09:46,095 p=78023 u=nwm n=ansible | TASK [Create destination folder] *****************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:09:47,943 p=78023 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:09:47,961 p=78023 u=nwm n=ansible | TASK [Add compose file for registry] *************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:09:50,264 p=78023 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:09:50,267 p=78023 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:09:50,267 p=78023 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:16:08,430 p=78119 u=nwm n=ansible | PLAY [Download and install OR] *******************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:16:08,439 p=78119 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:16:11,079 p=78119 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:16:11,099 p=78119 u=nwm n=ansible | TASK [uu_or : Check if the image is already built in local Docker repository] ********************************************************************************************************************************************************************************************
+2021-01-27 23:16:11,149 p=78119 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'registry_port' is undefined\n\nThe error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/roles/uu_or/tasks/main.yml': line 2, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n---\n- name: Check if the image is already built in local Docker repository\n  ^ here\n"}
+2021-01-27 23:16:11,150 p=78119 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:16:11,151 p=78119 u=nwm n=ansible | syshost                    : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-27 23:18:54,618 p=78169 u=nwm n=ansible | PLAY [Download and install OR] *******************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:54,629 p=78169 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:57,305 p=78169 u=nwm n=ansible | ok: [syshost]
+2021-01-27 23:18:57,324 p=78169 u=nwm n=ansible | TASK [uu_or : Check if the image is already built in local Docker repository] ********************************************************************************************************************************************************************************************
+2021-01-27 23:18:58,387 p=78169 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:18:58,410 p=78169 u=nwm n=ansible | TASK [uu_or : Fail when image already exists] ****************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:58,457 p=78169 u=nwm n=ansible | skipping: [syshost]
+2021-01-27 23:18:58,477 p=78169 u=nwm n=ansible | TASK [uu_or : Create appbox folder] **************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:59,530 p=78169 u=nwm n=ansible | changed: [syshost]
+2021-01-27 23:18:59,551 p=78169 u=nwm n=ansible | TASK [uu_or : Create access codes file] **********************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:59,847 p=78169 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "msg": "AnsibleUndefinedVariable: 'accessCode1' is undefined"}
+2021-01-27 23:18:59,849 p=78169 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-27 23:18:59,849 p=78169 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2021-01-28 07:18:04,623 p=78644 u=nwm n=ansible | PLAY [Download and install OR] *******************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:04,640 p=78644 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:07,911 p=78644 u=nwm n=ansible | ok: [syshost]
+2021-01-28 07:18:07,927 p=78644 u=nwm n=ansible | TASK [uu_or : Check if the image is already built in local Docker repository] ********************************************************************************************************************************************************************************************
+2021-01-28 07:18:11,296 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:11,312 p=78644 u=nwm n=ansible | TASK [uu_or : Fail when image already exists] ****************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:11,355 p=78644 u=nwm n=ansible | skipping: [syshost]
+2021-01-28 07:18:11,374 p=78644 u=nwm n=ansible | TASK [uu_or : Create appbox folder] **************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:12,495 p=78644 u=nwm n=ansible | ok: [syshost]
+2021-01-28 07:18:12,512 p=78644 u=nwm n=ansible | TASK [uu_or : Create access codes file] **********************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:14,488 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:14,505 p=78644 u=nwm n=ansible | TASK [uu_or : Create ruby script for download appbox] ********************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:16,178 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:16,194 p=78644 u=nwm n=ansible | TASK [uu_or : Run ruby script for appbox download] ***********************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:30,891 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:30,907 p=78644 u=nwm n=ansible | TASK [uu_or : Delete access codes file] **********************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:31,742 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:31,780 p=78644 u=nwm n=ansible | TASK [uu_or : Unarchive uu_operation_registry-dockerfiles-2.11.1.zip] ****************************************************************************************************************************************************************************************************
+2021-01-28 07:18:33,500 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:33,518 p=78644 u=nwm n=ansible | TASK [uu_or : Copy OR war file to build folder] **************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:34,443 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:34,459 p=78644 u=nwm n=ansible | TASK [uu_or : Replace REPO_PREFIX] ***************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:35,442 p=78644 u=nwm n=ansible | changed: [syshost] => (item=_push_or_images.sh)
+2021-01-28 07:18:36,228 p=78644 u=nwm n=ansible | changed: [syshost] => (item=_tag_or_images.sh)
+2021-01-28 07:18:36,247 p=78644 u=nwm n=ansible | TASK [uu_or : Replace tag to 2.11.1] *************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:37,234 p=78644 u=nwm n=ansible | changed: [syshost] => (item=build_uu_or-cmd.sh)
+2021-01-28 07:18:38,021 p=78644 u=nwm n=ansible | changed: [syshost] => (item=_push_or_images.sh)
+2021-01-28 07:18:38,803 p=78644 u=nwm n=ansible | changed: [syshost] => (item=_tag_or_images.sh)
+2021-01-28 07:18:38,821 p=78644 u=nwm n=ansible | TASK [uu_or : Copy jdk] **************************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:46,539 p=78644 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:18:46,541 p=78644 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:18:46,541 p=78644 u=nwm n=ansible | syshost                    : ok=12   changed=10   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2021-01-28 07:28:04,653 p=79091 u=nwm n=ansible | PLAY [Install docker host] ***********************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:04,670 p=79091 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:07,563 p=79091 u=nwm n=ansible | ok: [syshost]
+2021-01-28 07:28:07,583 p=79091 u=nwm n=ansible | TASK [docker : Add docker group] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:08,602 p=79091 u=nwm n=ansible | ok: [syshost]
+2021-01-28 07:28:08,622 p=79091 u=nwm n=ansible | TASK [docker : Add user to the group] ************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:10,003 p=79091 u=nwm n=ansible | changed: [syshost]
+2021-01-28 07:28:10,024 p=79091 u=nwm n=ansible | TASK [Install python3 for sshuttle] **************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:12,859 p=79091 u=nwm n=ansible | ok: [syshost]
+2021-01-28 07:28:12,863 p=79091 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 07:28:12,863 p=79091 u=nwm n=ansible | syshost                    : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 08:58:32,639 p=80533 u=nwm n=ansible | PLAY [Install docker host] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:32,661 p=80533 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:33,110 p=80533 u=nwm n=ansible |  [ERROR]: User interrupted execution
+
+2021-01-28 08:58:42,705 p=80551 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:42,723 p=80551 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:45,460 p=80551 u=nwm n=ansible | ok: [syshost]
+2021-01-28 08:58:45,480 p=80551 u=nwm n=ansible | TASK [Unarchive Java unlimited] ******************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:47,696 p=80551 u=nwm n=ansible | changed: [syshost]
+2021-01-28 08:58:47,699 p=80551 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 08:58:47,699 p=80551 u=nwm n=ansible | syshost                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:10:01,075 p=80687 u=nwm n=ansible | PLAY [Download and install C3] *******************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:01,095 p=80687 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:03,782 p=80687 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:10:03,804 p=80687 u=nwm n=ansible | TASK [uu_c3 : Check if the image is already built in local Docker repository] ********************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:04,824 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:04,846 p=80687 u=nwm n=ansible | TASK [uu_c3 : Fail when image already exists] ****************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:04,891 p=80687 u=nwm n=ansible | skipping: [syshost]
+2021-01-28 09:10:04,909 p=80687 u=nwm n=ansible | TASK [uu_c3 : Create appbox folder] **************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:05,940 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:05,963 p=80687 u=nwm n=ansible | TASK [uu_c3 : Create access codes file] **********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:08,080 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:08,102 p=80687 u=nwm n=ansible | TASK [uu_c3 : Create ruby script for download appbox] ********************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:09,793 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:09,814 p=80687 u=nwm n=ansible | TASK [uu_c3 : Run ruby script for appbox download] ***********************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:30,545 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:30,566 p=80687 u=nwm n=ansible | TASK [uu_c3 : Delete access codes file] **********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:31,589 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:31,633 p=80687 u=nwm n=ansible | TASK [uu_c3 : Unarchive uu_c3-dockerfiles-2.9.3.zip] *********************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:33,765 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:33,787 p=80687 u=nwm n=ansible | TASK [uu_c3 : Copy C3 war file to build folder] **************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:34,910 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:34,931 p=80687 u=nwm n=ansible | TASK [uu_c3 : Copy C3 scripts file to build folder] **********************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:35,749 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:35,770 p=80687 u=nwm n=ansible | TASK [uu_c3 : Replace REPO_PREFIX] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:36,802 p=80687 u=nwm n=ansible | changed: [syshost] => (item=_push_c3_images.sh)
+2021-01-28 09:10:37,609 p=80687 u=nwm n=ansible | changed: [syshost] => (item=_tag_c3_images.sh)
+2021-01-28 09:10:37,633 p=80687 u=nwm n=ansible | TASK [uu_c3 : Replace tag to 2.9.3] **************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:38,665 p=80687 u=nwm n=ansible | changed: [syshost] => (item=build_uu_c3-cmd.sh)
+2021-01-28 09:10:39,499 p=80687 u=nwm n=ansible | changed: [syshost] => (item=_push_c3_images.sh)
+2021-01-28 09:10:40,286 p=80687 u=nwm n=ansible | changed: [syshost] => (item=_tag_c3_images.sh)
+2021-01-28 09:10:40,309 p=80687 u=nwm n=ansible | TASK [uu_c3 : Copy shared files] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:42,664 p=80687 u=nwm n=ansible | changed: [syshost] => (item=jdk-8u144-linux-i586.rpm)
+2021-01-28 09:10:44,055 p=80687 u=nwm n=ansible | changed: [syshost] => (item=uu-client.properties)
+2021-01-28 09:10:44,078 p=80687 u=nwm n=ansible | TASK [uu_c3 : Copy UnlimitedJCEPolicyJDK8] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:46,455 p=80687 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:10:46,457 p=80687 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:10:46,457 p=80687 u=nwm n=ansible | syshost                    : ok=14   changed=13   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2021-01-28 09:25:28,087 p=81061 u=nwm n=ansible | PLAY [Deploy OR run script] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:25:28,106 p=81061 u=nwm n=ansible | ERROR! vars file ../../../group_vars/environments/{{ environment_name }}/all.yml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
+2021-01-28 09:25:43,354 p=81082 u=nwm n=ansible | PLAY [Deploy OR run script] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:25:43,363 p=81082 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:25:46,219 p=81082 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:25:46,241 p=81082 u=nwm n=ansible | TASK [Create start script] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:25:46,520 p=81082 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "msg": "Could not find or access '../../../roles/uu_or/templates/uu_or.sh'\nSearched in:\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/templates/../../../roles/uu_or/templates/uu_or.sh\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/../../../roles/uu_or/templates/uu_or.sh\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/templates/../../../roles/uu_or/templates/uu_or.sh\n\t/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/../../../roles/uu_or/templates/uu_or.sh on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+2021-01-28 09:25:46,522 p=81082 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:25:46,522 p=81082 u=nwm n=ansible | syshost                    : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:26:34,157 p=81120 u=nwm n=ansible | PLAY [Deploy OR run script] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:26:34,165 p=81120 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:26:36,093 p=81120 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:26:36,112 p=81120 u=nwm n=ansible | TASK [Create start script] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:26:36,415 p=81120 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "msg": "AnsibleUndefinedVariable: 'uucloud_mongo_hosts_full' is undefined"}
+2021-01-28 09:26:36,416 p=81120 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:26:36,416 p=81120 u=nwm n=ansible | syshost                    : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:45:35,093 p=81759 u=nwm n=ansible | PLAY [Deploy OR run script] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:45:35,106 p=81759 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:45:45,167 p=81759 u=nwm n=ansible | fatal: [syshost]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.101 port 22: Operation timed out", "unreachable": true}
+2021-01-28 09:45:45,168 p=81759 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:45:45,169 p=81759 u=nwm n=ansible | syshost                    : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:46:40,273 p=81826 u=nwm n=ansible | PLAY [Deploy OR run script] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:46:40,281 p=81826 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:46:45,398 p=81826 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:46:45,417 p=81826 u=nwm n=ansible | TASK [Create start script] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:46:48,067 p=81826 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:46:48,070 p=81826 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:46:48,070 p=81826 u=nwm n=ansible | syshost                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:53:32,934 p=81988 u=nwm n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'target_host' is undefined
+
+The error appears to be in '/Users/nwm/IdeaProjects/UUCloudTrainingUSY/playbooks/uucloud/3_install_mongodb.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ target_host }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2021-01-28 09:53:52,468 p=82008 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:53:52,476 p=82008 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:53:55,989 p=82008 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:53:56,007 p=82008 u=nwm n=ansible | TASK [Create destination folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:53:57,415 p=82008 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:53:57,436 p=82008 u=nwm n=ansible | TASK [Add compose file for mongodb] **************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:54:01,051 p=82008 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:54:01,054 p=82008 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:54:01,054 p=82008 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 09:55:21,567 p=82070 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:55:21,574 p=82070 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:55:24,721 p=82070 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:55:24,739 p=82070 u=nwm n=ansible | TASK [Create destination folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:55:26,070 p=82070 u=nwm n=ansible | ok: [syshost]
+2021-01-28 09:55:26,090 p=82070 u=nwm n=ansible | TASK [Add compose file for mongodb] **************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:55:28,747 p=82070 u=nwm n=ansible | changed: [syshost]
+2021-01-28 09:55:28,751 p=82070 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 09:55:28,751 p=82070 u=nwm n=ansible | syshost                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:35:23,730 p=82467 u=nwm n=ansible | PLAY [Deploy C3 files] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:23,748 p=82467 u=nwm n=ansible | ERROR! vars file ../../group_vars/environments/{{ environment_name }}/all.yml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
+2021-01-28 10:35:46,241 p=82487 u=nwm n=ansible | PLAY [Deploy C3 files] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:46,254 p=82487 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:52,020 p=82487 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:35:52,040 p=82487 u=nwm n=ansible | TASK [include_role : uu_c3] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:52,244 p=82487 u=nwm n=ansible | TASK [uu_c3 : Create directory uu_c3_demo] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:53,633 p=82487 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:35:53,659 p=82487 u=nwm n=ansible | TASK [uu_c3 : Create directory /var/log/c3_logs] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:54,792 p=82487 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:35:54,817 p=82487 u=nwm n=ansible | TASK [uu_c3 : Add configuration files] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:35:57,393 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uu-client.properties', u'src': u'uu-client.properties.j2'})
+2021-01-28 10:35:59,680 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/executor_controller.cfg', u'src': u'defaults/libra/executor_controller.cfg'})
+2021-01-28 10:36:03,071 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuApps-controller.cfg', u'src': u'defaults/libra/uuApps-controller.cfg'})
+2021-01-28 10:36:05,411 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuGatewayController.cfg', u'src': u'defaults/libra/uuGatewayController.cfg'})
+2021-01-28 10:36:07,693 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/log4r.xml', u'src': u'defaults/libra/log4r.xml'})
+2021-01-28 10:36:09,693 p=82487 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/log4r.xml', u'src': u'defaults/libra/log4r.xml'})
+2021-01-28 10:36:12,137 p=82487 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/ssh_config', u'src': u'defaults/libra/ssh_config'})
+2021-01-28 10:36:12,165 p=82487 u=nwm n=ansible | TASK [uu_c3 : Create start script] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:36:14,427 p=82487 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:36:14,452 p=82487 u=nwm n=ansible | TASK [uu_c3 : Copy id_rsa from syshost to c3 run folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:36:15,593 p=82487 u=nwm n=ansible | failed: [syshost] (item=id_rsa) => {"ansible_loop_var": "item", "changed": false, "item": "id_rsa", "msg": "Source /root/.ssh/id_rsa not found"}
+2021-01-28 10:36:16,672 p=82487 u=nwm n=ansible | failed: [syshost] (item=id_rsa.pub) => {"ansible_loop_var": "item", "changed": false, "item": "id_rsa.pub", "msg": "Source /root/.ssh/id_rsa.pub not found"}
+2021-01-28 10:36:16,676 p=82487 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:36:16,676 p=82487 u=nwm n=ansible | syshost                    : ok=5    changed=4    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:39:44,343 p=82697 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:39:44,351 p=82697 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:39:47,313 p=82697 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:39:47,336 p=82697 u=nwm n=ansible | TASK [Copy ssh keys] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:39:49,987 p=82697 u=nwm n=ansible | changed: [syshost] => (item=id_rsa_demo)
+2021-01-28 10:39:52,326 p=82697 u=nwm n=ansible | changed: [syshost] => (item=id_rsa_demo.pub)
+2021-01-28 10:39:52,331 p=82697 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:39:52,331 p=82697 u=nwm n=ansible | syshost                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:42:21,760 p=82781 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:42:21,769 p=82781 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:42:24,779 p=82781 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:42:24,802 p=82781 u=nwm n=ansible | TASK [Copy ssh private key] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:42:27,182 p=82781 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:42:27,205 p=82781 u=nwm n=ansible | TASK [Copy ssh public key] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:42:29,211 p=82781 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:42:29,213 p=82781 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:42:29,213 p=82781 u=nwm n=ansible | syshost                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:44:12,893 p=82862 u=nwm n=ansible | PLAY [Deploy C3 files] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:12,908 p=82862 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:15,942 p=82862 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:44:15,964 p=82862 u=nwm n=ansible | TASK [include_role : uu_c3] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:16,159 p=82862 u=nwm n=ansible | TASK [uu_c3 : Create directory uu_c3_demo] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:17,498 p=82862 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:44:17,523 p=82862 u=nwm n=ansible | TASK [uu_c3 : Create directory /var/log/c3_logs] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:18,626 p=82862 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:44:18,649 p=82862 u=nwm n=ansible | TASK [uu_c3 : Add configuration files] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:20,844 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uu-client.properties', u'src': u'uu-client.properties.j2'})
+2021-01-28 10:44:22,910 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/executor_controller.cfg', u'src': u'defaults/libra/executor_controller.cfg'})
+2021-01-28 10:44:24,921 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuApps-controller.cfg', u'src': u'defaults/libra/uuApps-controller.cfg'})
+2021-01-28 10:44:26,954 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuGatewayController.cfg', u'src': u'defaults/libra/uuGatewayController.cfg'})
+2021-01-28 10:44:29,494 p=82862 u=nwm n=ansible | changed: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/buildImage.sh', u'src': u'defaults/libra/buildImage.sh.j2'})
+2021-01-28 10:44:31,527 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/log4r.xml', u'src': u'defaults/libra/log4r.xml'})
+2021-01-28 10:44:33,359 p=82862 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/ssh_config', u'src': u'defaults/libra/ssh_config'})
+2021-01-28 10:44:33,387 p=82862 u=nwm n=ansible | TASK [uu_c3 : Create start script] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:35,282 p=82862 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:44:35,306 p=82862 u=nwm n=ansible | TASK [uu_c3 : Copy id_rsa from syshost to c3 run folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:36,522 p=82862 u=nwm n=ansible | failed: [syshost] (item=id_rsa) => {"ansible_loop_var": "item", "changed": false, "item": "id_rsa", "msg": "Source /root/.ssh/id_rsa not found"}
+2021-01-28 10:44:37,582 p=82862 u=nwm n=ansible | failed: [syshost] (item=id_rsa.pub) => {"ansible_loop_var": "item", "changed": false, "item": "id_rsa.pub", "msg": "Source /root/.ssh/id_rsa.pub not found"}
+2021-01-28 10:44:37,586 p=82862 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:44:37,586 p=82862 u=nwm n=ansible | syshost                    : ok=5    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:45:20,524 p=83028 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:20,533 p=83028 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:22,928 p=83028 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:45:22,950 p=83028 u=nwm n=ansible | TASK [Copy ssh private key] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:25,552 p=83028 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:45:25,575 p=83028 u=nwm n=ansible | TASK [Copy ssh public key] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:27,911 p=83028 u=nwm n=ansible | changed: [syshost]
+2021-01-28 10:45:27,913 p=83028 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:27,913 p=83028 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 10:45:31,616 p=83088 u=nwm n=ansible | PLAY [Deploy C3 files] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:31,630 p=83088 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:34,058 p=83088 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:45:34,080 p=83088 u=nwm n=ansible | TASK [include_role : uu_c3] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:34,272 p=83088 u=nwm n=ansible | TASK [uu_c3 : Create directory uu_c3_demo] *******************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:35,531 p=83088 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:45:35,554 p=83088 u=nwm n=ansible | TASK [uu_c3 : Create directory /var/log/c3_logs] *************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:36,654 p=83088 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:45:36,678 p=83088 u=nwm n=ansible | TASK [uu_c3 : Add configuration files] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:38,750 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uu-client.properties', u'src': u'uu-client.properties.j2'})
+2021-01-28 10:45:40,627 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/executor_controller.cfg', u'src': u'defaults/libra/executor_controller.cfg'})
+2021-01-28 10:45:42,528 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuApps-controller.cfg', u'src': u'defaults/libra/uuApps-controller.cfg'})
+2021-01-28 10:45:44,489 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/uuGatewayController.cfg', u'src': u'defaults/libra/uuGatewayController.cfg'})
+2021-01-28 10:45:46,409 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/buildImage.sh', u'src': u'defaults/libra/buildImage.sh.j2'})
+2021-01-28 10:45:48,332 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/log4r.xml', u'src': u'defaults/libra/log4r.xml'})
+2021-01-28 10:45:50,242 p=83088 u=nwm n=ansible | ok: [syshost] => (item={u'dest': u'/etc/docker/uu_c3_demo/ssh_config', u'src': u'defaults/libra/ssh_config'})
+2021-01-28 10:45:50,271 p=83088 u=nwm n=ansible | TASK [uu_c3 : Create start script] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:52,102 p=83088 u=nwm n=ansible | ok: [syshost]
+2021-01-28 10:45:52,126 p=83088 u=nwm n=ansible | TASK [uu_c3 : Copy id_rsa from syshost to c3 run folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:53,462 p=83088 u=nwm n=ansible | changed: [syshost] => (item=id_rsa)
+2021-01-28 10:45:54,611 p=83088 u=nwm n=ansible | changed: [syshost] => (item=id_rsa.pub)
+2021-01-28 10:45:54,617 p=83088 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 10:45:54,617 p=83088 u=nwm n=ansible | syshost                    : ok=6    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 11:46:24,331 p=84434 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 11:46:24,347 p=84434 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 11:46:27,430 p=84434 u=nwm n=ansible | ok: [syshost]
+2021-01-28 11:46:27,451 p=84434 u=nwm n=ansible | TASK [Create destination folder] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 11:46:28,734 p=84434 u=nwm n=ansible | changed: [syshost]
+2021-01-28 11:46:28,761 p=84434 u=nwm n=ansible | TASK [Add compose file for uu_gw] ****************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 11:46:31,331 p=84434 u=nwm n=ansible | changed: [syshost]
+2021-01-28 11:46:31,334 p=84434 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 11:46:31,334 p=84434 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:35:05,916 p=5378 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:35:05,948 p=5378 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:35:16,108 p=5378 u=nwm n=ansible | fatal: [syshost]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 10.0.1.101 port 22: Operation timed out", "unreachable": true}
+2021-01-28 20:35:16,110 p=5378 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:35:16,110 p=5378 u=nwm n=ansible | syshost                    : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:37:20,816 p=5475 u=nwm n=ansible | PLAY [syshost] ***********************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:37:20,832 p=5475 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:37:25,265 p=5475 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:37:25,294 p=5475 u=nwm n=ansible | TASK [Copy uuEE 22-7709-1 access codes] **********************************************************************************************************************************************************************************************************************************
+2021-01-28 20:37:29,365 p=5475 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "checksum": "718fa3a639ecf633030787c24947b30a56a1ca1c", "msg": "Destination directory /mnt/share/uu_script_users/weyYqBQ9 does not exist"}
+2021-01-28 20:37:29,367 p=5475 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:37:29,367 p=5475 u=nwm n=ansible | syshost                    : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:38:31,978 p=5529 u=nwm n=ansible | PLAY [Install syshost basic requirements] ********************************************************************************************************************************************************************************************************************************
+2021-01-28 20:38:31,986 p=5529 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:38:35,206 p=5529 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:38:35,229 p=5529 u=nwm n=ansible | TASK [Create uuEEs folder] ***********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:38:36,678 p=5529 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:38:36,705 p=5529 u=nwm n=ansible | TASK [Copy deployment uuEE] **********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:38:39,596 p=5529 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:38:39,598 p=5529 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:38:39,598 p=5529 u=nwm n=ansible | syshost                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:41:32,326 p=5619 u=nwm n=ansible | PLAY [Copy latest runtimestacks] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:41:32,345 p=5619 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:41:36,208 p=5619 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:41:36,233 p=5619 u=nwm n=ansible | TASK [Copy Java unlimited] ***********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:41:40,090 p=5619 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:41:40,121 p=5619 u=nwm n=ansible | TASK [Unarchive Java unlimited] ******************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:41:41,837 p=5619 u=nwm n=ansible | fatal: [syshost]: FAILED! => {"changed": false, "msg": "dest '/opt/installation/appserver_openjdk_stacks-1.4.1/' must be an existing dir"}
+2021-01-28 20:41:41,838 p=5619 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:41:41,839 p=5619 u=nwm n=ansible | syshost                    : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:42:46,645 p=5682 u=nwm n=ansible | PLAY [Copy latest runtimestacks] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:46,660 p=5682 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:49,946 p=5682 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:42:49,974 p=5682 u=nwm n=ansible | TASK [Copy runtimestack] *************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:52,413 p=5682 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:42:52,439 p=5682 u=nwm n=ansible | TASK [Create runtimestack folder] ****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:53,734 p=5682 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:42:53,761 p=5682 u=nwm n=ansible | TASK [Unarchive runtimestack] ********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:56,183 p=5682 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:42:56,186 p=5682 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:42:56,186 p=5682 u=nwm n=ansible | syshost                    : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:46:45,937 p=5791 u=nwm n=ansible | PLAY [Copy latest runtimestacks] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:45,955 p=5791 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:48,998 p=5791 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:46:49,023 p=5791 u=nwm n=ansible | TASK [Copy runtimestack] *************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:51,764 p=5791 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:46:51,793 p=5791 u=nwm n=ansible | TASK [Create runtimestack folder] ****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:53,118 p=5791 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:46:53,147 p=5791 u=nwm n=ansible | TASK [Unarchive runtimestack] ********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:55,369 p=5791 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:46:55,372 p=5791 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:46:55,372 p=5791 u=nwm n=ansible | syshost                    : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:47:10,826 p=5857 u=nwm n=ansible | PLAY [Copy latest runtimestacks] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:10,833 p=5857 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:13,252 p=5857 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:47:13,274 p=5857 u=nwm n=ansible | TASK [Copy runtimestack] *************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:16,272 p=5857 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:47:16,301 p=5857 u=nwm n=ansible | TASK [Create runtimestack folder] ****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:17,525 p=5857 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:47:17,553 p=5857 u=nwm n=ansible | TASK [Unarchive runtimestack] ********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:19,803 p=5857 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:47:19,806 p=5857 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:19,806 p=5857 u=nwm n=ansible | syshost                    : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2021-01-28 20:47:27,311 p=5915 u=nwm n=ansible | PLAY [Copy latest runtimestacks] *****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:27,318 p=5915 u=nwm n=ansible | TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:30,262 p=5915 u=nwm n=ansible | ok: [syshost]
+2021-01-28 20:47:30,284 p=5915 u=nwm n=ansible | TASK [Copy runtimestack] *************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:33,003 p=5915 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:47:33,031 p=5915 u=nwm n=ansible | TASK [Create runtimestack folder] ****************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:34,377 p=5915 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:47:34,404 p=5915 u=nwm n=ansible | TASK [Unarchive runtimestack] ********************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:36,755 p=5915 u=nwm n=ansible | changed: [syshost]
+2021-01-28 20:47:36,759 p=5915 u=nwm n=ansible | PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+2021-01-28 20:47:36,759 p=5915 u=nwm n=ansible | syshost                    : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

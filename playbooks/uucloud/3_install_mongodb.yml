@@ -1,0 +1,12 @@
+---
+- hosts: "{{ target_host }}"
+  tasks:
+    - name: Create destination folder
+      file:
+        path: /etc/docker/mongodb
+        state: directory
+    - name: Add compose file for mongodb
+      template:
+        src: ../../roles/mongodb/templates/docker-compose_mongodb.yml.j2
+        dest: /etc/docker/mongodb/docker-compose.yml
+        mode: '644'

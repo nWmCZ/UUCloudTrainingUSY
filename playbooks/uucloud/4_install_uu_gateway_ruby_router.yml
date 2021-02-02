@@ -1,0 +1,12 @@
+---
+- hosts: "{{ target_host }}"
+  tasks:
+    - name: Create destination folder
+      file:
+        path: /etc/docker/uu_gw
+        state: directory
+    - name: Add compose file for uu_gw
+      template:
+        src: ../../roles/uu_gateway_ruby_router/templates/docker-compose_uu_gateway_ruby_router.yml.j2
+        dest: /etc/docker/uu_gw/docker-compose.yml
+        mode: '644'

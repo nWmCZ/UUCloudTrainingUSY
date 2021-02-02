@@ -1,0 +1,20 @@
+---
+- name: Copy latest runtimestacks
+  hosts: syshost
+  become: true
+  tasks:
+    - name: Copy runtimestack
+      copy:
+        src: ~/work/temp/uucloud/appserver_openjdk_stacks-1.4.1.zip
+        dest: /opt/installation/appserver_openjdk_stacks-1.4.1.zip
+
+    - name: Create runtimestack folder
+      file:
+        path: /opt/installation/appserver_openjdk_stacks-1.4.1/
+        state: directory
+
+    - name: Unarchive runtimestack
+      unarchive:
+        src: /opt/installation/appserver_openjdk_stacks-1.4.1.zip
+        dest: /opt/installation/appserver_openjdk_stacks-1.4.1/
+        remote_src: yes

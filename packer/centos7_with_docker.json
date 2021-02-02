@@ -1,0 +1,44 @@
+{
+  "variables": {
+    "client_id": "{{env `AZURE_CLIENT_ID`}}",
+    "client_secret": "{{env `AZURE_CLIENT_SECRET`}}",
+    "tenant_id": "{{env `AZURE_TENANT_ID`}}",
+    "subscription_id": "{{env `AZURE_SUBSCRIPTION_ID`}}"
+  },
+  "builders": [
+    {
+      "type": "azure-arm",
+      "client_id": "{{ user `client_id`}}",
+      "client_secret": "{{ user `client_secret`}}",
+      "tenant_id": "{{ user `tenant_id`}}",
+      "subscription_id": "{{ user `subscription_id`}}",
+      "managed_image_resource_group_name": "uucloud",
+      "managed_image_name": "centos7_with_docker",
+      "os_type": "Linux",
+      "image_publisher": "OpenLogic",
+      "image_offer": "CentOS",
+      "image_sku": "7_9",
+      "azure_tags": {
+        "kind": "PACKER"
+      },
+      "location": "West Europe",
+      "vm_size": "Standard_B4MS"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "roles_path": "../roles",
+      "playbook_file": "../playbooks/uucloud/10_install_docker_host.yml",
+      "ansible_env_vars": [ "ANSIBLE_ROLES_PATH=/Users/nwm/IdeaProjects/UUCloudTrainingUSY/roles" ]
+    },
+    {
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+        "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }
+  ]
+}

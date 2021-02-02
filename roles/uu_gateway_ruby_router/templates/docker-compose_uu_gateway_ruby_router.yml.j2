@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  uu_gw:
+    restart: always
+    container_name: uuos9_gateway_base
+    image: uuos9_gateway_base:1.0.0
+    ports:
+      - 80:80
+      - 81:81

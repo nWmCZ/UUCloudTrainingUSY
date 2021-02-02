@@ -1,0 +1,5 @@
+---
+# defaults file for docker
+registry_hostname: registry
+registry_port: 5000
+builder_host_user: uucloud

@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  mongodb:
+    restart: always
+    container_name: mongo
+    image: mongo:4.0
+    ports:
+      - 27017:27017
+    volumes:
+      - /var/lib/docker/mongodb_data:/data/db

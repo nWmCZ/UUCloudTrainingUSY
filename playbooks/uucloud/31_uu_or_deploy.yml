@@ -1,0 +1,12 @@
+---
+- name: Deploy OR run script
+  hosts: syshost
+  become: true
+  vars:
+    uu_or_appbox_version: 2.11.1
+  tasks:
+    - name: Create start script
+      template:
+        src: ../../roles/uu_or/templates/uu_or.sh
+        dest: /etc/docker/run_uu_or_{{ environment_name | lower }}_{{ inventory_hostname_short }}.sh
+        mode: 0755

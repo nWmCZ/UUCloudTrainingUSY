@@ -1,0 +1,9 @@
+---
+- name: Deploy C3 files
+  hosts: syshost
+  vars:
+    uu_c3_appbox_version: 2.9.3
+  tasks:
+    - include_role:
+        name: uu_c3
+        tasks_from: deploy

@@ -1,0 +1,69 @@
+---
+- name: Check if the image is already built in local Docker repository
+  command: docker images -q {{ registry_hostname }}:{{ registry_port }}/uu_or-cmd:{{ uu_or_appbox_version }}
+  register: image_exists
+
+- name: Fail when image already exists
+  fail:
+    msg: OR with version {{ uu_or_appbox_version }} already exists in local Docker repository. Image ID {{ image_exists.stdout }}.
+  when: image_exists.stdout_lines|length > 0
+
+- name: Create appbox folder
+  file:
+    path: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}"
+    state: directory
+
+- name: Create access codes file
+  template:
+    src: login
+    dest: "{{ uu_login_file_path }}"
+
+- name: Create ruby script for download appbox
+  template:
+    src: DownloadFilesFromUU.rb
+    dest: "{{ uu_or_base_folder }}/DownloadFilesFromUU.rb"
+
+- name: Run ruby script for appbox download
+  command: ruby {{ uu_or_base_folder }}/DownloadFilesFromUU.rb
+
+- name: Delete access codes file
+  file:
+    path: "{{ uu_login_file_path }}"
+    state: absent
+
+- name: Unarchive uu_operation_registry-dockerfiles-{{ uu_or_appbox_version }}.zip
+  unarchive:
+    src: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/uu_operation_registry-dockerfiles-{{ uu_or_appbox_version }}.zip"
+    dest: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/"
+    remote_src: yes
+
+- name: Copy OR war file to build folder
+  copy:
+    src: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/uu_operation_registry-cmd-{{ uu_or_appbox_version }}.war"
+    dest: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/docker/or/uu_operation_registry.war"
+    remote_src: yes
+
+- name: Replace REPO_PREFIX
+  lineinfile:
+    path: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/docker/{{ item }}"
+    regexp: '^REPO_PREFIX'
+    line: 'REPO_PREFIX="{{ registry_hostname }}:5000"'
+  with_items:
+    - _push_or_images.sh
+    - _tag_or_images.sh
+
+- name: Replace tag to {{ uu_or_appbox_version }}
+  replace:
+    path: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/docker/{{ item }}"
+    regexp: "latest"
+    replace: "{{ uu_or_appbox_version }}"
+  with_items:
+    - build_uu_or-cmd.sh
+    - _push_or_images.sh
+    - _tag_or_images.sh
+
+- name: Copy jdk
+  copy:
+    src: /opt/installation/shared-files/jdk-8u144-linux-i586.rpm
+    dest: "{{ uu_or_base_folder }}/{{ uu_or_appbox_version }}/docker/or/"
+    remote_src: true

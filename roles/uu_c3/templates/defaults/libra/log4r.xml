@@ -1,0 +1,28 @@
+<log4r_config>
+  <pre_config>
+    <parameter name="file_messageFormat" value="%d [%5l] (%C) %m" />
+    <parameter name="messageFormat" value="TRACE_LOG %l {\&quot;app_deployment_uri\&quot;:\&quot;%X{:appDeploymentUri}\&quot;, \&quot;eventTime\&quot;:\&quot;%d{ISO8601}\&quot;, \&quot;logger\&quot;:\&quot;%C\&quot;,\&quot;message\&quot;:\&quot;%m\&quot;,\&quot;traceId\&quot;:\&quot;%X{:traceId}\&quot;,\&quot;processId\&quot;:\&quot;%p\&quot;,\&quot;threadId\&quot;:\&quot;%X{:threadId}\&quot;,\&quot;threadName\&quot;:\&quot;%X{:threadName}\&quot;,\&quot;resourceUri\&quot;:\&quot;%X{:resourceUri}\&quot;,\&quot;identityId\&quot;:\&quot;%X{:identityId} %x{:identityId}\&quot;,\&quot;clientId\&quot;:\&quot;%X{:clientId}\&quot;,\&quot;sessionId\&quot;:\&quot;%X{:sessionId}\&quot;,\&quot;errorId\&quot;:\&quot;%x{:errorId}\&quot;,\&quot;errorTrace\&quot;:\&quot;%t\&quot;}" />
+    <parameter name="dateFormat" value="%Y-%m-%dT%H:%M:%S" />
+  </pre_config>
+
+  <outputter name="stdout" type="StdoutOutputter" level="INFO">
+    <formatter type="PatternFormatter" pattern="#{messageFormat}">
+      <date_format>#{dateFormat}</date_format>
+    </formatter>
+  </outputter>
+
+  <outputter name="script-executor" type="RollingFileOutputter" filename="/opt/uu_c3_logs/.write/uu_c3_script_executor.log" maxsize="5242880" level="INFO">
+    <formatter type="PatternFormatter" pattern="#{file_messageFormat}">
+      <date_format>#{dateFormat}</date_format>
+    </formatter>
+  </outputter>
+
+  <logger name="UuC3::Helper::ProgressMonitor" outputters="stdout"/>
+
+  <!-- Switch level to DEBUG in order to log invoked scripts. -->
+  <logger name="UuC3::Helper::ScriptExecutor" outputters="stdout, script-executor"/>
+
+  <logger name="UuC3::Helper::PerformanceLogger" level="FATAL" outputters="stdout" additive="false"/>
+
+</log4r_config>
+
